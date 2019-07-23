@@ -4,8 +4,6 @@ const superagent = require('superagent');
 const PREFIX = '​';
 const testpre = '-';
 let activated = '0'
-let activated2 = '0'
-let activated3= '0'
 
 bot.on('ready', () =>{
 	console.log('Menace sends their regards.');
@@ -14,24 +12,24 @@ bot.on('ready', () =>{
 
 bot.on('guildMemberAdd', member =>{
 
-	const channel = member.guild.channels.find(channel => channel.name === "ᴡᴇʟᴄᴏᴍᴇ-ɴ-ʙʏᴇ");
+	const channel = member.guild.channels.find(channel => channel.name === "welcome");
 	if(!channel) return;
-	let role = member.guild.roles.find("name", "Unverified");
+	let role = member.guild.roles.find("name", "Chainsawed");
 	member.addRole(role.id);
-	channel.sendMessage(`${member}, Please read the rules while an admin verifies you.`);
+	channel.sendMessage(`Enjoy your stay, ${member}.`);
 })
 
 bot.on('guildMemberRemove', member =>{
 
 	const channel = member.guild.channels.find(channel => channel.name === "ᴡᴇʟᴄᴏᴍᴇ-ɴ-ʙʏᴇ");
 	if(!channel) return;
-	channel.sendMessage(`Look guys! Look! Look! ${member} disconnected.`)
+	channel.sendMessage(`${member} got sawed.`)
 })
 bot.on('message', msg=>{
 
 	mention = msg.mentions.users.first();
 	
-	if(msg.author.id === '333357946744602647')
+	if(msg.author.id === '603346768960159765')
 	{
 		if(msg.content === '-activate')
 		{
@@ -42,7 +40,7 @@ bot.on('message', msg=>{
 			activated = '0'
 		}
 	}
-	if(msg.author.id === '333357946744602647')
+	if(msg.author.id === '603346768960159765')
 	{
 		if(activated === '1')
 		{
@@ -52,54 +50,6 @@ bot.on('message', msg=>{
 			msg.channel.send(content)
 		}
 	}
-	
-	
-	
-	if(msg.author.id === '345322541499285507')
-	{
-		if(msg.content === '-activate')
-		{
-			activated2 = '1'
-		}
-		if(msg.content === '-deactivate')
-		{
-			activated2 = '0'
-		}
-	}
-	if(msg.author.id === '345322541499285507')
-	{
-		if(activated2 === '1')
-		{
-			console.log('wtf')
-			let content = msg.content
-			msg.channel.bulkDelete('1')
-			msg.channel.send(content)
-		}
-	}
-	
-	if(msg.author.id === '372420756610613259')
-	{
-		if(msg.content === '-activate')
-		{
-			activated3 = '1'
-		}
-		if(msg.content === '-deactivate')
-		{
-			activated3 = '0'
-		}
-	}
-	if(msg.author.id === '372420756610613259')
-	{
-		if(activated3 === '1')
-		{
-			console.log('wtf')
-			let content = msg.content
-			msg.channel.bulkDelete('1')
-			msg.channel.send(content)
-		}
-	}
-	
-	
 	
 	if(msg.content === "-help"){
 		const embed = new RichEmbed()
@@ -168,35 +118,23 @@ bot.on('message', msg=>{
 			if(!msg.guild.me.hasPermission("ADMINISTRATOR")) return msg.channel.sendMessage("I don't have the allowed permission to make an announcement!");
 			if(!args[1]) return msg.channel.sendMessage('What are you trying to announce?')
 			const aMessage = args.join(" ").slice(14);
-			const achannel = bot.channels.find(channel => channel.name === "ᴀɴɴᴏᴜɴᴄᴇᴍᴇɴᴛꜱ");
+			const achannel = bot.channels.find(channel => channel.name === "announcement");
 			const aAuthor = msg.author.username
 			const agif = new Attachment('https://cdn.discordapp.com/attachments/598945838646951956/599001058374844437/men_gif.gif');
 			if(!achannel) return;
 			msg.channel.bulkDelete(1);
 			achannel.sendMessage('@everyone\n\n' + aMessage + '\n\n' + 'Announcement made by ' + aAuthor + '.')
-			achannel.sendMessage(agif)
+			//achannel.sendMessage(agif)
 		break;
 		case '-regards':
 			mention = msg.mentions.users.first();
 			if(!msg.member.roles.find(r => r.name === "Leader")) return msg.channel.sendMessage("You are not the leader. You can't do that.");
-			if(msg.author.id === '372420756610613259'){
+			if(msg.author.id === '603346768960159765'){
 				if(!args[1]) return msg.channel.sendMessage('Who are you trying to send your regards?')
 				const regard = new Attachment('https://cdn.discordapp.com/attachments/598945838646951956/599001058374844437/men_gif.gif')
-				mention.sendMessage('𝕸𝖊𝖓𝖆𝖈𝖊 sends their regards.');
-				mention.sendMessage(regard);
+				mention.sendMessage('Chainsaw sends their regards.');
+				//mention.sendMessage(regard);
 				msg.channel.bulkDelete(1);
-			}
-			else{
-				if(msg.author.id === '345322541499285507'){
-					if(!args[1]) return msg.channel.sendMessage('Who are you trying to send your regards?')
-					const regard = new Attachment('https://cdn.discordapp.com/attachments/598945838646951956/599001058374844437/men_gif.gif')
-					mention.sendMessage('𝕸𝖊𝖓𝖆𝖈𝖊 send their regards.');
-					mention.sendMessage(regard);
-					msg.channel.bulkDelete(1);
-				}
-				else{
-					return msg.channel.sendMessage("You are not the leader. You can't do that.");
-				}
 			}
 		break;
 		case '-kick':
